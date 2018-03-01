@@ -1,0 +1,46 @@
+.bg {
+  background-color: #ccc;
+  height: 100vh
+}
+.tab-content{
+
+}
+.coadpage {
+  width:700rpx;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 40rpx;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  position: relative
+}
+.coadpage .title {
+  font-size: 48rpx;
+  color: #333;
+  padding-bottom: 60rpx;
+  border-bottom: 1rpx solid #ccc
+}
+.coadpage .newsinfo{
+  padding: 40rpx 0 60rpx;
+  font-size: 28rpx;
+  line-height: 1.5
+}
+.coadpage .footer{
+  position: absolute;
+  bottom: 40rpx;
+  left: 40rpx;
+  width: 620rpx;
+  border-top: 1px solid #ccc;
+  font-size: 28rpx;
+  line-height: 2;
+  display: flex;
+  justify-content: space-between;
+  height: 60rpx
+}
+.sharebtn {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+  background-color: #999;
+  margin: 10rpx
+}

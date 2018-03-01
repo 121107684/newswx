@@ -1,0 +1,19 @@
+<view class="bg">
+  <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+    <swiper-item wx:for="{{item}}" wx:key="index">
+      <view class="coadpage"  style="height:{{centerwinHeight}}rpx">
+        <view class="title">
+          三星S9＆iPhoneX面对面开怼
+        </view>
+        <view class="newsinfo">
+          中新经纬客户端2月28日电 港交所今日发布业绩公告。数据显示，截至2017年12月31日，集团实现收入及其他收益131.80亿港元，同比增长18.57%；实现股东应占溢利74.04亿港元，同比增长28.34%；每股基本盈利6.03港元。 中新经纬客户端2月28日电 港交所今日发布业绩公告。数据显示，截至2017年12月31日，集团实现收入及其他收益131.80亿港元，同比增长18.57%；实现股东应占溢利74.04亿港元，同比增长28.34%；每股基本盈利6.03港元。 中新经纬客户端2月28日电中新经纬客户端2月28日电 港交所今日发布业绩公告。数据显示，截至2017年12月31日，集团实现收入及其他收益131.80亿港元，同比增长18.57%；实现股东应占溢利74.04亿港元，同比增长28.34%；每股基本盈利6.03港元。 中新经纬客户端2月28日电 港交所今日发布业绩公告。数据显示，截至2017年12月31日，集团实现收入及其他收益131.80亿港元，同比增长18.57%；实现股东应占溢利74.04亿港元，同比增长28.34%；每股基本盈利6.03港元。 中新经纬客户端2月28日电
+        </view>
+        <view class="footer">
+          <view class="form">今天|金融见闻</view>
+          <view class="sharebtn"></view>
+        </view>
+      </view>
+
+    </swiper-item>
+  </swiper>
+</view>

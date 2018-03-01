@@ -1,0 +1,16 @@
+{
+  "pages":[
+    "pages/card/card",
+    "pages/list/list",
+    
+    "pages/share/share",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#3e3f42",
+    "navigationBarTitleText": "XX播报",
+    "navigationBarTextStyle":"#fff"
+  }
+}
