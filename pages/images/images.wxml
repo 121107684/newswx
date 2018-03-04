@@ -1,0 +1,6 @@
+<!--pages/images/images.wxml-->
+<view>
+<canvas class="images" canvas-id="myCanvas" style='height:{{srchei}}px'/>
+<view class="btnsave">保存图片</view>
+</view>
+

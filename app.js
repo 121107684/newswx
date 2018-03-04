@@ -6,12 +6,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+   
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -35,5 +30,30 @@ App({
   },
   globalData: {
     userInfo: null
+  },
+  publicpost: function (url, method, data, successcall, servererror) {
+    let that = this
+    var thistoken = wx.getStorageSync('token')
+    let postdata = { ...data }
+    wx.request({
+      url: 'https://xcx.su77.net/api' + url, //仅为示例，并非真实的接口地址
+      method: method,
+      data: postdata,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        successcall(res);
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 1000)
+
+      },
+      fail: function (res) {
+        //servererror(res);
+        wx.hideLoading()
+      }
+    })
   }
+
 })

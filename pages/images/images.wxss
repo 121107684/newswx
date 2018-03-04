@@ -1,0 +1,15 @@
+/* pages/images/images.wxss */
+.btnsave {
+  width: 680rpx;
+  margin: 20rpx auto ;
+  background-color: #09bb07;
+  color: #fff;
+  text-align: center;
+  line-height: 90rpx;
+  border-radius: 10rpx
+}
+.images {
+  margin: 0 auto;
+  width: 750rpx;
+  
+}

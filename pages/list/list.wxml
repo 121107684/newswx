@@ -1,25 +1,14 @@
 <!--pages/list/list.wxml-->
 <view class="indexlist">
-  <view class="indexpage">
-    <view class="time">22:45</view>
+  <view class="indexpage"  wx:for="{{newlist}}" wx:key="*this" wx:for-item="newlist">
+    <view class="time">{{newlist.published_time}}</view>
     <view class="title">
-      港交所2017年实现净利74亿港元 拟每股派息2.85港元
+      {{newlist.post_title}}
     </view>
-    <view class="text">中新经纬客户端2月28日电 港交所今日发布业绩公告。数据显示，截至2017年12月31日，集团实现收入及其他收益131.80亿港元，同比增长18.57%；</view>
+    <view class="text">{{newlist.post_excerpt}}</view>
     <view class="footer">
-      <navigator url="../card/card?title=id" class="seeinfo">查看详情</navigator>
-      <view bindtap='shareact' class="sharethis">分享全文</view>
-    </view>
-  </view>
-  <view class="indexpage">
-    <view class="time">22:45</view>
-    <view class="title">
-      港交所2017年实现净利74亿港元 拟每股派息2.85港元
-    </view>
-    <view class="text">中新经纬客户端2月28日电 港交所今日发布业绩公告。数据显示，截至2017年12月31日，集团实现收入及其他收益131.80亿港元，同比增长18.57%；</view>
-    <view class="footer">
-       <navigator url="../card/card?title=id" class="seeinfo">查看详情</navigator>
-      <view class="sharethis">分享全文</view>
+      <navigator url="../card/card?title={{newlist.id}}" class="seeinfo">查看详情</navigator>
+      <view bindtap='shareact' data-newid="{{newlist.id}}" class="sharethis">分享全文</view>
     </view>
   </view>
 </view>

@@ -6,9 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    pageindex:1
   },
-  shareact:function(){
+  shareact:function(e){
     wx.showActionSheet({
       itemList: ['分享给朋友', '生成卡片 保存分享', '复制链接'],
       success: function (res) {
@@ -19,9 +19,15 @@ Page({
           case 1:
             break;
           case 2:
+            wx.setClipboardData({
+              data: "https://xcx.su77.net/api/new?id=" + e.currentTarget.dataset.newid,
+              success: function (res) {
+                console.log(res)
+              }
+            })
             break;
         }
-        console.log(res.tapIndex)
+       
       },
       fail: function (res) {
         console.log(res.errMsg)
@@ -32,7 +38,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    app.publicpost("/article",'GET',{page:this.data.pageindex},res=>{
+      this.setData({
+        newlist:res.data.data
+      })
+    })
   },
 
   /**
@@ -46,7 +56,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
