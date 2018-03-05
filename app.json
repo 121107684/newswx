@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/images/images",
+    
     "pages/list/list",
+    "pages/images/images",
     "pages/card/card",
     "pages/share/share",
     "pages/index/index",

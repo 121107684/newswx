@@ -14,6 +14,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    this.setData({
+      imagesid: options.id
+    })
     console.log(wx.getSystemInfoSync().windowHeight)
     this.setData({
       srchei: wx.getSystemInfoSync().windowHeight - 100
@@ -34,7 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.publicpost("/article/info.html", 'GET', { id: 22 }, res => {
+    app.publicpost("/article/info.html", 'GET', { id: this.data.imagesid }, res => {
       this.setData({
         newlist: res.data.data
       })
@@ -43,6 +46,7 @@ Page({
       const ctx = wx.createCanvasContext('myCanvas')
       ctx.setFontSize(16)
       ctx.setTextAlign('center')
+      
       ctx.fillText(ongtext.post_title, wx.getSystemInfoSync().windowWidth / 2, 80)
       ctx.strokeStyle = "blue";
       ctx.moveTo(20, 100);
@@ -57,6 +61,9 @@ Page({
       ctx.draw()
 
     });
+    function drawtitle(){
+
+    }
     function drawText(t, x, y, w, ctx) {
 
       var chr = t.split("");
@@ -86,7 +93,28 @@ Page({
   onHide: function () {
   
   },
-
+  saveimg:function(){
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: wx.getSystemInfoSync().windowWidth,
+      height: wx.getSystemInfoSync().windowHeight - 100,
+      destWidth: wx.getSystemInfoSync().windowWidth,
+      destHeight: wx.getSystemInfoSync().windowHeight - 100,
+      canvasId: 'myCanvas',
+      success: function (res) {
+          console.log(res)
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+              success(res) {
+                console.log(res)
+              }
+          })
+        
+      }
+    })
+  
+  },
   /**
    * 生命周期函数--监听页面卸载
    */

@@ -4,25 +4,19 @@ Page({
     winHeight: "",//窗口高度
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
-    expertList: [{ //假数据
-      img: "avatar.png",
-      name: "欢顔",
-      tag: "知名情感博主",
-      answer: 134,
-      listen: 2234
-    }],
-    item: [0, 1, 2, 3, 4, 5, 6, 7]
+    expertList: [],
+    item: []
   },
   // 滚动切换标签样式
   switchTab: function (e) {
     console.log(e)
-    if (e.detail.current == this.data.item.length-1){
-     
-      this.data.item.push(-1,-2,-3)
+    if (e.detail.current == this.data.item.length - 1) {
+
+      this.data.item.push(-1, -2, -3)
       this.setData({
         item: this.data.item
-     });
-     
+      });
+
     }
     console.log(this.data.item)
     // this.setData({
@@ -52,23 +46,48 @@ Page({
       })
     }
   },
-  onLoad: function () {
-    var that = this;
+  onLoad: function (option) {
+    console.log(option)
+    var newarrthis = new Array();
+    for (var i = 0; i < Math.ceil((+option.index + 1) / 10) * 10;i++){
+      newarrthis[i] = {};
+    }
+    this.setData({
+      currentTab:+option.index,
+      ajaxnum: Math.ceil((+option.index+1) / 10) 
+    })
+    this.setData({
+      item: newarrthis
+    })
+    //console.log(this.data.ajaxnum)
+    
+
     //  高度自适应
     wx.getSystemInfo({
-      success: function (res) {
-        console.log(res)
+      success: (res) => {
         var clientHeight = res.windowHeight,
           clientWidth = res.windowWidth,
           rpxR = 750 / clientWidth;
         var calc = clientHeight * rpxR;
-        console.log(calc)
-        that.setData({
+        this.setData({
           winHeight: calc,
-          centerwinHeight: calc-30
+          centerwinHeight: calc - 30
         });
       }
     });
   },
-  footerTap: app.footerTap
+  onShow: function () {
+    app.publicpost("/article", 'GET', { page: this.data.ajaxnum }, res => {
+      var placrdata = this.data.currentTab;
+      console.log(this.data.currentTab);
+      var iteminto = this.data.item.splice(placrdata, 10, res.data.data)
+      console.log(res.data.data.every())
+      // this.setData({
+      //   item: this.data.item.splice(placrdata, 10, res.data.data.every()),
+      //   //pageindex: this.data.pageindex + 1
+      // })
+      // console.log(this.data.item)
+    })
+
+  },
 })

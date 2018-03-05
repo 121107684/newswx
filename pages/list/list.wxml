@@ -1,15 +1,27 @@
 <!--pages/list/list.wxml-->
 <view class="indexlist">
-  <view class="indexpage"  wx:for="{{newlist}}" wx:key="*this" wx:for-item="newlist">
+  <view class="indexpage" wx:for="{{newlist}}" wx:key="*this" wx:for-index="index" wx:for-item="newlist">
     <view class="time">{{newlist.published_time}}</view>
     <view class="title">
       {{newlist.post_title}}
     </view>
     <view class="text">{{newlist.post_excerpt}}</view>
     <view class="footer">
-      <navigator url="../card/card?title={{newlist.id}}" class="seeinfo">查看详情</navigator>
-      <view bindtap='shareact' data-newid="{{newlist.id}}" class="sharethis">分享全文</view>
+      <navigator url="../card/card?title={{newlist.id}}&index={{index}}" class="seeinfo">查看详情</navigator>
+      <!-- <button class="sharethis" type="primary" bindtap="listenerButton" data-newid="{{newlist.id}}">分享全文</button> -->
+      <view bindtap="listenerButton" data-newid="{{newlist.id}}"  data-newtitle="{{newlist.post_title}}"  class="sharethis">分享全文</view>
     </view>
   </view>
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" data-newid="{{newlist.id}}">
+
+    <block wx:for-items="{{actionSheetItems}}" wx:for-index="index"  wx:key="*this" >
+        <action-sheet-item bindtap='shareact' data-index="{{index}}">
+        <button open-type="share" class="sharebtnthis" wx:if="{{index==0}}">转发</button>
+        {{item}}
+        </action-sheet-item>
+    </block>
+    <!--自动隐藏action-sheet-->
+    <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
 </view>
  
