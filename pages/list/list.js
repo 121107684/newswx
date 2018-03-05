@@ -15,22 +15,25 @@ Page({
       //取反
       actionSheetHidden: !this.data.actionSheetHidden,
       newid: e.currentTarget.dataset.newid,
-      newtitle: e.currentTarget.dataset.newtitle
+      newtitle: e.currentTarget.dataset.newtitle,
+      rightindex: e.currentTarget.dataset.index
     });
   },
 
   listenerActionSheet: function (e) {
-    console.log("aaaa")
     this.setData({
       actionSheetHidden: !this.data.actionSheetHidden
     })
   },
 
   shareact:function(e){
+    this.setData({
+     
+    })
+    console.log(e)
     switch (e.currentTarget.dataset.index) {
           case 0:
-            console.log(this)
-            console.log(e)
+            
             break;
           case 1:
             console.log(e)
@@ -42,7 +45,11 @@ Page({
             wx.setClipboardData({
               data: "https://xcx.su77.net/api/new?id=" + this.data.newid,
               success: function (res) {
-                console.log(res)
+                wx.showToast({
+                  title: '复制成功',
+                  icon: 'success',
+                  duration: 2000
+                })
               }
             })
             break;
@@ -102,7 +109,6 @@ Page({
       pageindex:1 
     })
     app.publicpost("/article", 'GET', { page: this.data.pageindex }, res => {
-      console.log(res)
       this.setData({
         newlist: res.data.data,
         pageindex: this.data.pageindex++
@@ -117,10 +123,8 @@ Page({
    */
   onReachBottom: function () {
     app.publicpost("/article", 'GET', { page: this.data.pageindex }, res => {
-      console.log(res)
       var newarr = this.data.newlist;
       var temparr = newarr.concat(res.data.data);
-      console.log(temparr)
       this.setData({
         newlist: temparr,
         pageindex: this.data.pageindex+1
@@ -133,12 +137,16 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '微信 xx播报',
+      title: '微信八九财经',
       desc: this.data.newtitle,
-      path: '/page/user?id=123',
+      path: '/page/card/card?id=' + this.data.newid + '&index=' + this.data.index,
       success:(res)=>{
         this.listenerActionSheet()
-        console.log(res)
+        wx.showToast({
+          title: '分享成功',
+          icon: 'success',
+          duration: 2000
+        })
       },
       fail: (res) =>{
         this.listenerActionSheet()

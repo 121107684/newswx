@@ -10,10 +10,21 @@
         </view>
         <view class="footer">
           <view class="form">{{item.published_time}}</view>
-          <view class="sharebtn"></view>
+          <view class="sharebtn" bindtap="listenerButton" data-newid="{{item.id}}"  data-newtitle="{{item.post_title}}" ></view>
         </view>
       </view>
 
     </swiper-item>
   </swiper>
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" data-newid="{{newlist.id}}">
+
+    <block wx:for-items="{{actionSheetItems}}" wx:for-index="index"  wx:key="*this" >
+        <action-sheet-item bindtap='shareact' data-index="{{index}}">
+        <button open-type="share" class="sharebtnthis" wx:if="{{index==0}}">转发</button>
+        {{item}}
+        </action-sheet-item>
+    </block>
+    <!--自动隐藏action-sheet-->
+    <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
 </view>

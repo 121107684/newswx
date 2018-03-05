@@ -19,7 +19,7 @@ Page({
     })
     console.log(wx.getSystemInfoSync().windowHeight)
     this.setData({
-      srchei: wx.getSystemInfoSync().windowHeight - 100
+      srchei: wx.getSystemInfoSync().windowHeight - 60
     })
     
     
@@ -47,22 +47,64 @@ Page({
       ctx.setFontSize(16)
       ctx.setTextAlign('center')
       
-      ctx.fillText(ongtext.post_title, wx.getSystemInfoSync().windowWidth / 2, 80)
+      var chr = ongtext.post_title.split("");
+      var temp = "";
+      var row = [];
+      var ystart =30
+      ctx.textBaseline = "middle";
+
+      for (var a = 0; a < chr.length; a++) {
+        if (temp.length * 16 < wx.getSystemInfoSync().windowWidth) { }
+        else {
+          row.push(temp);
+          temp = "";
+        }
+        temp += chr[a];
+      }
+      row.push(temp);
+      for (var b = 0; b < row.length; b++) {
+        ctx.fillText(row[b], wx.getSystemInfoSync().windowWidth / 2, ystart + (b + 1) * 20);
+      } 
+      ystart = ystart + b*20
+      ctx.setTextAlign('right')
+      ystart = ystart + 25
+      ctx.setFontSize(12)
+      ctx.fillText(ongtext.published_time, wx.getSystemInfoSync().windowWidth-20, ystart)
+      ystart = ystart+15
+      console.log(ystart)
       ctx.strokeStyle = "blue";
-      ctx.moveTo(20, 100);
-      ctx.lineTo(wx.getSystemInfoSync().windowWidth - 20, 100);
+      ctx.moveTo(20, ystart);
+      ctx.lineTo(wx.getSystemInfoSync().windowWidth - 20, ystart);
       ctx.setTextAlign('left')
       ctx.setFontSize(12)
       ctx.stroke();
-      drawText(ongtext.post_content, 20, 120, wx.getSystemInfoSync().windowWidth, ctx);
+      ystart = ystart+10
+      drawText(ongtext.post_content, 20, ystart, wx.getSystemInfoSync().windowWidth, ctx);
       console.log(ctx)
       console.log(this.data.srchei)
-      ctx.drawImage("../../utils/code.jpg", wx.getSystemInfoSync().windowWidth / 2 - 60, this.data.srchei-150,120, 120)
+      ctx.drawImage("../../utils/code.jpg", wx.getSystemInfoSync().windowWidth / 2 -50, this.data.srchei-100,100, 100)
       ctx.draw()
 
     });
     function drawtitle(){
+      var chr = t.split("");
+      var temp = "";
+      var row = [];
 
+      ctx.textBaseline = "middle";
+
+      for (var a = 0; a < chr.length; a++) {
+        if (temp.length * 14 < w) { }
+        else {
+          row.push(temp);
+          temp = "";
+        }
+        temp += chr[a];
+      }
+      row.push(temp);
+      for (var b = 0; b < row.length; b++) {
+        ctx.fillText(row[b], x, y + (b + 1) * 20);
+      }
     }
     function drawText(t, x, y, w, ctx) {
 
@@ -134,12 +176,10 @@ Page({
    */
   onReachBottom: function () {
   
-  },
+  }
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
   
-  }
 })
