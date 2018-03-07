@@ -19,7 +19,7 @@ Page({
     })
     console.log(wx.getSystemInfoSync().windowHeight)
     this.setData({
-      srchei: wx.getSystemInfoSync().windowHeight - 60
+      srchei: wx.getSystemInfoSync().windowHeight - 80
     })
     
     
@@ -72,7 +72,7 @@ Page({
       ctx.fillText(ongtext.published_time, wx.getSystemInfoSync().windowWidth-20, ystart)
       ystart = ystart+15
       console.log(ystart)
-      ctx.strokeStyle = "blue";
+      ctx.strokeStyle = "#333";
       ctx.moveTo(20, ystart);
       ctx.lineTo(wx.getSystemInfoSync().windowWidth - 20, ystart);
       ctx.setTextAlign('left')
@@ -149,7 +149,11 @@ Page({
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
               success(res) {
-                console.log(res)
+                wx.showToast({
+                  title: '保存成功',
+                  icon: 'success',
+                  duration: 2000
+                })
               }
           })
         

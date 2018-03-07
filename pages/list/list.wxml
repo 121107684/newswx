@@ -7,8 +7,8 @@
     </view>
     <view class="text">{{newlist.post_excerpt}}</view>
     <view class="footer">
-      <navigator url="../card/card?id={{newlist.id}}&index={{index}}" class="seeinfo">查看详情</navigator>
-      <!-- <button class="sharethis" type="primary" bindtap="listenerButton" data-newid="{{newlist.id}}">分享全文</button> -->
+      <!-- <navigator url="../card/card?id={{newlist.id}}&index={{index}}" class="seeinfo">查看详情</navigator> -->
+      <navigator url="../card/card?idshare={{newlist.id}}" class="seeinfo">查看详情</navigator>
       <view bindtap="listenerButton" data-newid="{{newlist.id}}" data-index="{{index}}"  data-newtitle="{{newlist.post_title}}"  class="sharethis">分享全文</view>
     </view>
   </view>
@@ -16,7 +16,7 @@
 
     <block wx:for-items="{{actionSheetItems}}" wx:for-index="index"  wx:key="*this" >
         <action-sheet-item bindtap='shareact' data-index="{{index}}">
-        <button open-type="share" class="sharebtnthis" wx:if="{{index==0}}">转发</button>
+        <button bindtap='shareacthide' open-type="share" class="sharebtnthis" wx:if="{{index==0}}">转发</button>
         {{item}}
         </action-sheet-item>
     </block>

@@ -22,10 +22,15 @@ Page({
 
   listenerActionSheet: function (e) {
     this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden,
+      newid: undefined,
+    })
+  },
+  shareacthide: function (e) {
+    this.setData({
       actionSheetHidden: !this.data.actionSheetHidden
     })
   },
-
   shareact:function(e){
     this.setData({
      
@@ -136,11 +141,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    if (this.data.newid == undefined){
+      var pathstr = "pages/list/list"
+    }else{
+      'pages/card/card?id=' + this.data.newid + '&index=' + this.data.pageindex
+    }
     return {
       title: '微信八九财经',
       desc: this.data.newtitle,
-      path: '/page/card/card?id=' + this.data.newid + '&index=' + this.data.index,
+      path: 'pages/card/card?idshare=' + this.data.newid,
       success:(res)=>{
+        console.log(res)
         this.listenerActionSheet()
         wx.showToast({
           title: '分享成功',

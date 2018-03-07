@@ -20,7 +20,7 @@
 
     <block wx:for-items="{{actionSheetItems}}" wx:for-index="index"  wx:key="*this" >
         <action-sheet-item bindtap='shareact' data-index="{{index}}">
-        <button open-type="share" class="sharebtnthis" wx:if="{{index==0}}">转发</button>
+        <button bindtap='shareacthide' open-type="share" class="sharebtnthis" wx:if="{{index==0}}">转发</button>
         {{item}}
         </action-sheet-item>
     </block>

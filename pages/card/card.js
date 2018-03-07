@@ -69,19 +69,29 @@ Page({
     }
   },
   onLoad: function (option) {
-    console.log(Math.ceil((+option.index + 1) / 10));
+    console.log(option)
     var newarrthis = new Array();
-    for (var i = 0; i < Math.ceil((+option.index + 1) / 10) * 10;i++){
+    for (var i = 0; i < Math.ceil((+option.index + 1) / 10) * 10; i++) {
       newarrthis[i] = {};
     }
-    this.setData({
-      currentTab:+option.index,
-      ajaxnum: Math.ceil((+option.index+1) / 10) ,
-      ajaxnumup: Math.ceil((+option.index + 1) / 10)
-    })
-    this.setData({
-      item: newarrthis
-    })
+    if (option.idshare==undefined){
+      this.setData({
+        currentTab: +option.index,
+        ajaxnum: Math.ceil((+option.index + 1) / 10),
+        ajaxnumup: Math.ceil((+option.index + 1) / 10)
+      })
+      this.setData({
+        item: newarrthis
+      })
+    }else{
+      this.setData({
+        currentTab: 0,
+        ajaxnum: 1,
+        ajaxnumup: 1,
+        sharenewid: option.idshare
+      })
+    }
+    
     //  高度自适应
     wx.getSystemInfo({
       success: (res) => {
@@ -97,7 +107,12 @@ Page({
     });
   },
   onShow: function () {
-    app.publicpost("/article", 'GET', { page: this.data.ajaxnum }, res => {
+    if (this.data.sharenewid==undefined){
+      var odjdata = { page: this.data.ajaxnum }
+    }else{
+      var odjdata = { page: this.data.ajaxnum, startid: this.data.sharenewid}
+    }
+    app.publicpost("/article", 'GET', odjdata, res => {
       var iteminto = this.data.item
       var j = 0;
       for (var i = (this.data.ajaxnum - 1) * 10; i < (this.data.ajaxnum - 1) * 10 + res.data.data.length;i++ ){
@@ -127,12 +142,9 @@ Page({
       actionSheetHidden: !this.data.actionSheetHidden
     })
   },
-  shareact: function (e) {
-    
+  shareact: function (e) {   
     switch (e.currentTarget.dataset.index) {
       case 0:
-        
-       
         break;
       case 1:
         console.log(e)
@@ -153,13 +165,17 @@ Page({
         })
         break;
     }
-
+  },
+  shareacthide: function (e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    })
   },
   onShareAppMessage: function () {
     return {
       title: '微信八九财经',
       desc: this.data.newtitle,
-      path: '/page/card/card?id=' + this.data.newid + '&index=' + this.data.index,
+      path: 'pages/card/card?idshare=' + this.data.newid,
       success: (res) => {
         this.listenerActionSheet()
         wx.showToast({
