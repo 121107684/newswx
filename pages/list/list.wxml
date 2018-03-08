@@ -7,9 +7,9 @@
     </view>
     <view class="text">{{newlist.post_excerpt}}</view>
     <view class="footer">
-      <!-- <navigator url="../card/card?id={{newlist.id}}&index={{index}}" class="seeinfo">查看详情</navigator> -->
-      <navigator url="../card/card?idshare={{newlist.id}}" class="seeinfo">查看详情</navigator>
-      <view bindtap="listenerButton" data-newid="{{newlist.id}}" data-index="{{index}}"  data-newtitle="{{newlist.post_title}}"  class="sharethis">分享全文</view>
+      <navigator url="../card/card?id={{newlist.id}}&index={{index}}" class="seeinfo">查看详情</navigator>
+      <!-- <navigator url="../card/card?idshare={{newlist.id}}" class="seeinfo">查看详情</navigator> -->
+      <view bindtap="listenerButton" data-newid="{{newlist.id}}" data-index="{{index}}"  data-newtitle="{{newlist.post_title}}"  class="sharethis" data-url="{{newlist.url}}">分享全文</view>
     </view>
   </view>
   <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" data-newid="{{newlist.id}}">

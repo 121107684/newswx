@@ -10,13 +10,17 @@ Page({
     actionSheetHidden: true,
     actionSheetItems: ['分享给朋友', '生成卡片 保存分享', '复制链接']
   },
+  gettext:function(){
+    
+  },
   listenerButton: function (e) {
     this.setData({
       //取反
       actionSheetHidden: !this.data.actionSheetHidden,
       newid: e.currentTarget.dataset.newid,
       newtitle: e.currentTarget.dataset.newtitle,
-      rightindex: e.currentTarget.dataset.index
+      rightindex: e.currentTarget.dataset.index,
+      newurl: e.currentTarget.dataset.url
     });
   },
 
@@ -32,13 +36,9 @@ Page({
     })
   },
   shareact:function(e){
-    this.setData({
-     
-    })
-    console.log(e)
+    
     switch (e.currentTarget.dataset.index) {
-          case 0:
-            
+          case 0:           
             break;
           case 1:
             console.log(e)
@@ -47,8 +47,9 @@ Page({
             })
             break;
           case 2:
+        console.log(this)
             wx.setClipboardData({
-              data: "https://xcx.su77.net/api/new?id=" + this.data.newid,
+              data: this.data.newurl,
               success: function (res) {
                 wx.showToast({
                   title: '复制成功',
@@ -59,7 +60,7 @@ Page({
             })
             break;
         }
-       
+    this.listenerActionSheet()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -149,7 +150,7 @@ Page({
     return {
       title: '微信八九财经',
       desc: this.data.newtitle,
-      path: 'pages/card/card?idshare=' + this.data.newid,
+      path: 'pages/sharecard/sharecard?idshare=' + this.data.newid,
       success:(res)=>{
         console.log(res)
         this.listenerActionSheet()

@@ -20,6 +20,13 @@
   padding: 48rpx 0 20rpx;
   line-height: 64rpx
 }
+.text{
+  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
 .indexpage .time{
   position: absolute;
   top: 0;

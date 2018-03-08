@@ -1,7 +1,6 @@
+<!--pages/sharecard/sharecard.wxml-->
 <view class="bg">
-  <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
-    <swiper-item wx:for="{{item}}" wx:key="index">
-      <view class="coadpage"  style="height:{{centerwinHeight}}rpx">
+<view class="coadpage"  style="height:{{centerwinHeight}}rpx">
         <view class="title">
           {{item.post_title}}
         </view>
@@ -13,10 +12,7 @@
           <view class="sharebtn" bindtap="listenerButton" data-url="{{item.url}}" data-newid="{{item.id}}"  data-newtitle="{{item.post_title}}" ></view>
         </view>
       </view>
-
-    </swiper-item>
-  </swiper>
-  <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" data-newid="{{newlist.id}}">
+      <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" data-newid="{{newlist.id}}">
 
     <block wx:for-items="{{actionSheetItems}}" wx:for-index="index"  wx:key="*this" >
         <action-sheet-item bindtap='shareact' data-index="{{index}}">
@@ -28,3 +24,5 @@
     <action-sheet-cancel>取消</action-sheet-cancel>
 </action-sheet>
 </view>
+
+

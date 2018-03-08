@@ -1,6 +1,12 @@
 <!--pages/images/images.wxml-->
-<view>
-<canvas class="images" canvas-id="myCanvas" style='height:{{srchei}}px'/>
+<view class="bg">
+<view class="testscale">
+  
+  <canvas class="images" canvas-id="myCanvassm" style='height:{{srchei/3}}px;width:{{srcwid/3}}px'/>
+</view>
+<view class="hidebox">
+  <canvas class="images" canvas-id="myCanvas" style='height:{{srchei}}px;width:{{srcwid}}px'/>
+</view>
 <view class="btnsave" bindtap='saveimg'>保存图片</view>
 </view>
 

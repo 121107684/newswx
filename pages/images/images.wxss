@@ -5,11 +5,21 @@
   background-color: #09bb07;
   color: #fff;
   text-align: center;
-  line-height: 90rpx;
-  border-radius: 10rpx
+  line-height:90rpx;
+  border-radius: 10rpx;
 }
 .images {
   margin: 0 auto;
-  width: 750rpx;
   
 }
+.bg{
+  /* transform: scale(0.33);
+  transform-origin:0 0; 
+  overflow: hidden;*/
+  margin: 0 auto;
+}
+.hidebox{
+  width: 1rpx;
+  height: 1rpx;overflow: hidden
+}
+

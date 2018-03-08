@@ -133,7 +133,8 @@ Page({
       actionSheetHidden: !this.data.actionSheetHidden,
       newid: e.currentTarget.dataset.newid,
       newtitle: e.currentTarget.dataset.newtitle,
-      rightindex: e.currentTarget.dataset.index
+      rightindex: e.currentTarget.dataset.index,
+      newurl: e.currentTarget.dataset.url
     });
   },
 
@@ -154,7 +155,7 @@ Page({
         break;
       case 2:
         wx.setClipboardData({
-          data: "https://xcx.su77.net/api/new?id=" + this.data.newid,
+          data: this.data.newurl,
           success: function (res) {
             wx.showToast({
               title: '复制成功',
@@ -165,6 +166,7 @@ Page({
         })
         break;
     }
+    this.listenerActionSheet()
   },
   shareacthide: function (e) {
     this.setData({
@@ -175,7 +177,7 @@ Page({
     return {
       title: '微信八九财经',
       desc: this.data.newtitle,
-      path: 'pages/card/card?idshare=' + this.data.newid,
+      path: 'pages/sharecard/sharecard?idshare=' + this.data.newid,
       success: (res) => {
         this.listenerActionSheet()
         wx.showToast({

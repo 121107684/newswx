@@ -1,7 +1,8 @@
 {
   "pages":[
-    
+  
     "pages/list/list",
+    "pages/sharecard/sharecard",
     "pages/images/images",
     "pages/card/card",
     "pages/share/share",
